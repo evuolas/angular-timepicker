@@ -3,7 +3,7 @@
 (function (angular) {
     'use strict';
 
-    angular.module('dnTimepicker', ['ui.bootstrap.position', 'dateParser'])
+    angular.module('dnTimepicker', ['ui.bootstrap.position', 'dateParser2'])
         .factory('dnTimepickerHelpers', function () {
             return {
                 stringToMinutes: function (str) {
@@ -49,7 +49,7 @@
                 }
             };
         })
-        .directive('dnTimepicker', ['$compile', '$parse', '$position', '$document', 'dateFilter', '$dateParser', 'dnTimepickerHelpers', '$log',
+        .directive('dnTimepicker', ['$compile', '$parse', '$position', '$document', 'dateFilter', '$dateParser2', 'dnTimepickerHelpers', '$log',
             function ($compile, $parse, $position, $document, dateFilter, $dateParser, dnTimepickerHelpers, $log) {
                 return {
                     restrict: 'A',
@@ -80,7 +80,7 @@
                                 return list;
                             }
                         };
-                        
+
                         function getUpdatedDate(date) {
                             if (!current) {
                                 current = angular.isDate(scope.ngModel) ? scope.ngModel : new Date();
@@ -89,12 +89,12 @@
                             current.setHours(date.getHours());
                             current.setMinutes(date.getMinutes());
                             current.setSeconds(date.getSeconds());
-                            
+
                             setCurrentValue(current);
-                            
+
                             return current;
                         }
-                        
+
                         function setCurrentValue(value) {
                             if (!angular.isDate(value)) {
                                 value = $dateParser(scope.ngModel, scope.timepicker.timeFormat);
@@ -102,7 +102,7 @@
                                     $log.warn('Failed to parse model.');
                                 }
                             }
-                            
+
                             current = value;
                         }
 
